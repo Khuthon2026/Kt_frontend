@@ -22,6 +22,7 @@ export default function ReportModal({ open, onClose, onSubmit, initialName = '' 
 
   useEffect(() => {
     if (open) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setName(initialName);
       setText('');
       setError(null);

@@ -142,8 +142,10 @@ export default function VerifyModal({ open, state, progress, result, error }: Pr
               확인
             </button>
           </div>
-        );
-      })()}
+          <h2 id="verifyTitle" className="mb-2 text-xl font-bold text-ink">분석 완료</h2>
+          <p className="text-sm text-[#5f6368]">{result.app.name}</p>
+        </div>
+      )}
 
       {state === 'failed' && (
         <div className="flex flex-col items-center py-4 text-center">
