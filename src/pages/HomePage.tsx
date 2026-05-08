@@ -14,7 +14,11 @@ import { useToast } from '../hooks/useToast';
 import { useVerify } from '../hooks/useVerify';
 import type { UrlEntry, SearchResult } from '../types';
 
-export default function HomePage() {
+interface Props {
+  onSearch?: (appName: string) => void;
+}
+
+export default function HomePage({ onSearch }: Props) {
   const [query, setQuery] = useState('');
   const [urls, setUrls] = useState<UrlEntry[]>([]);
   const [urlOpen, setUrlOpen] = useState(false);
