@@ -26,6 +26,9 @@ type Props = {
 
 export default function VerifyModal({ open, state, progress, result, error }: Props) {
   const msgIdx = Math.min(Math.floor(progress / 20), MESSAGES.length - 1);
+  const risk = result ? getRiskLevel(result.spam_score) : 'safe';
+  const cfg = RISK_CONFIG[risk];
+  const keywords = result ? Object.entries(result.review_stats?.trust_keywords ?? {}) : [];
 
   const handleClose = () => {
     if (state === 'loading') return;
@@ -56,12 +59,7 @@ export default function VerifyModal({ open, state, progress, result, error }: Pr
         </div>
       )}
 
-      {state === 'done' && result && (() => {
-        const risk = getRiskLevel(result.spam_score);
-        const cfg = RISK_CONFIG[risk];
-        const keywords = Object.entries(result.review_stats?.trust_keywords ?? {});
-
-        return (
+      {state === 'done' && result && (
           <div className="max-h-[70vh] overflow-y-auto">
             {/* 앱 헤더 */}
             <div className="mb-4 flex items-center gap-3">
@@ -142,8 +140,7 @@ export default function VerifyModal({ open, state, progress, result, error }: Pr
               확인
             </button>
           </div>
-        );
-      })()}
+      )}
 
       {state === 'failed' && (
         <div className="flex flex-col items-center py-4 text-center">
