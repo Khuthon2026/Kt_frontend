@@ -12,9 +12,10 @@ interface Props {
 }
 
 function toRisk(spam: number) {
-  if (spam >= 7) return '고위험 앱으로 분류되었어요. 주의하세요.';
-  if (spam >= 4) return '일부 위험 요소가 발견되었어요.';
-  return '비교적 안전한 앱으로 확인되었어요.';
+  if (spam >= 4) return '광고와 실제 게임이 완전히 달라요';
+  if (spam >= 3) return '광고와 다소 차이가 있을 수 있어요';
+  if (spam >= 1.5) return '광고와 실제가 대체로 일치해요';
+  return '광고에 과장이 없는 앱이에요';
 }
 
 function buildKeywords(trust: Record<string, number>): KeywordEntry[] {
