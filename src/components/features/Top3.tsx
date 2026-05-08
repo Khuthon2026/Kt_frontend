@@ -4,12 +4,10 @@ interface Props {
   onPick: (name: string) => void;
 }
 
-const rankColors = ['bg-lime-brand text-ink', 'bg-white text-ink', 'bg-gray-brand text-ink'];
-
 export default function Top3({ onPick }: Props) {
   return (
     <div className="mt-5 flex max-w-[720px] flex-wrap justify-center gap-2.5">
-      {TOP3.map((it, i) => (
+      {TOP3.map((it) => (
         <button
           key={it.rank}
           onClick={() => onPick(it.title)}
