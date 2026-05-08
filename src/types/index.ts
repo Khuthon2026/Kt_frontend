@@ -95,4 +95,6 @@ export interface VerifyResult {
     category_overlap: number;
     pattern_score: number;
   };
+  screenshots: string[];
+  ad_thumbnail: string | null;
 }

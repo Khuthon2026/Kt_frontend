@@ -6,16 +6,32 @@ import WarnPill from '../ui/WarnPill';
 interface IndexAnalysisProps {
   data: IndexAnalysisData;
   playKey: number | string;
+  onCompare?: () => void;
 }
 
-export default function IndexAnalysis({ data, playKey }: IndexAnalysisProps) {
+export default function IndexAnalysis({ data, playKey, onCompare }: IndexAnalysisProps) {
   return (
     <section className="mb-[22px] rounded-[22px] border border-white/[0.07] bg-white/[0.04] px-[30px] py-[26px] backdrop-blur-[4px]">
-      <div className="mb-7 flex items-center gap-3.5">
-        <div className="text-[18px] font-bold tracking-[-0.01em] text-[#e8eef2]">
-          지수분석
+      <div className="mb-7 flex items-center justify-between gap-3.5">
+        <div className="flex items-center gap-3.5">
+          <div className="text-[18px] font-bold tracking-[-0.01em] text-[#e8eef2]">
+            지수분석
+          </div>
+          <WarnPill score={data.score}>{data.warning}</WarnPill>
         </div>
-        <WarnPill score={data.score}>{data.warning}</WarnPill>
+        {onCompare && (
+          <button
+            type="button"
+            onClick={onCompare}
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.06] px-3.5 py-1.5 text-[12px] font-semibold text-white/70 transition hover:bg-white/10 hover:text-white/90"
+          >
+            <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round">
+              <rect x={2} y={3} width={9} height={18} rx={1.5} />
+              <rect x={13} y={3} width={9} height={18} rx={1.5} />
+            </svg>
+            광고 vs 실제 비교
+          </button>
+        )}
       </div>
 
       <div className="grid grid-cols-[340px_1fr] items-center gap-7 px-1 pb-1 pt-2">

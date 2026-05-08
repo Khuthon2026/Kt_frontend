@@ -4,6 +4,7 @@ import Footer from '@/components/ui/Footer';
 import AppCard from '@/components/features/AppCard';
 import IndexAnalysis from '@/components/features/IndexAnalysis';
 import Keywords from '@/components/features/Keywords';
+import CompareModal from '@/components/features/CompareModal';
 import type { VerifyResult, AppMeta, IndexAnalysisData, KeywordEntry, ReviewEntry } from '@/types';
 
 interface Props {
@@ -52,6 +53,7 @@ function buildReviews(result: VerifyResult): ReviewEntry[] {
 
 export default function ResultPage({ result, onBack }: Props) {
   const [playKey] = useState(0);
+  const [compareOpen, setCompareOpen] = useState(false);
 
   const app: AppMeta = {
     initial: result.app.name.charAt(0),
@@ -97,11 +99,18 @@ export default function ResultPage({ result, onBack }: Props) {
 
       <main className="relative z-2 mx-auto w-full max-w-225 flex-1 px-6 pb-20 pt-4">
         <AppCard app={app} />
-        <IndexAnalysis data={indexData} playKey={playKey} />
+        <IndexAnalysis data={indexData} playKey={playKey} onCompare={() => setCompareOpen(true)} />
         {keywords.length > 0 && <Keywords keywords={keywords} reviews={reviews} />}
       </main>
 
       <Footer />
+
+      <CompareModal
+        open={compareOpen}
+        onClose={() => setCompareOpen(false)}
+        adUrl={result.ad_thumbnail ?? null}
+        screenshots={result.screenshots ?? []}
+      />
     </div>
   );
 }
