@@ -22,11 +22,11 @@ export const searchApps = async (q: string): Promise<SearchResult[]> => {
   }));
 };
 
-export const startVerify = async (google_play_id: string): Promise<{ job_id: string }> => {
+export const startVerify = async (google_play_id: string, ad_url?: string): Promise<{ job_id: string }> => {
   const res = await fetch('/api/verify', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ google_play_id }),
+    body: JSON.stringify({ google_play_id, ...(ad_url ? { ad_url } : {}) }),
   });
   if (!res.ok) throw new Error('분석 요청 실패');
   const json = await res.json();

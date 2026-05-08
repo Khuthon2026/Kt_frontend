@@ -9,15 +9,17 @@ export function useVerify() {
   const [progress, setProgress] = useState(0);
   const [result, setResult] = useState<VerifyResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [adUrl, setAdUrl] = useState<string | null>(null);
 
-  const run = async (google_play_id: string): Promise<VerifyResult | null> => {
+  const run = async (google_play_id: string, adUrlParam?: string): Promise<VerifyResult | null> => {
     setState('loading');
     setProgress(0);
     setResult(null);
     setError(null);
+    setAdUrl(adUrlParam ?? null);
 
     try {
-      const { job_id } = await startVerify(google_play_id);
+      const { job_id } = await startVerify(google_play_id, adUrlParam);
 
       while (true) {
         const { status, progress: p } = await getVerifyStatus(job_id);
@@ -38,5 +40,5 @@ export function useVerify() {
     }
   };
 
-  return { state, progress, result, error, run };
+  return { state, progress, result, error, adUrl, run };
 }

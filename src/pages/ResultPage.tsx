@@ -9,6 +9,7 @@ import type { VerifyResult, AppMeta, IndexAnalysisData, KeywordEntry, ReviewEntr
 
 interface Props {
   result: VerifyResult;
+  adUrl?: string | null;
   onBack: () => void;
 }
 
@@ -51,7 +52,7 @@ function buildReviews(result: VerifyResult): ReviewEntry[] {
   return [...neg, ...pos];
 }
 
-export default function ResultPage({ result, onBack }: Props) {
+export default function ResultPage({ result, adUrl, onBack }: Props) {
   const [playKey] = useState(0);
   const [compareOpen, setCompareOpen] = useState(false);
 
@@ -108,7 +109,7 @@ export default function ResultPage({ result, onBack }: Props) {
       <CompareModal
         open={compareOpen}
         onClose={() => setCompareOpen(false)}
-        adUrl={result.ad_thumbnail ?? null}
+        adUrl={adUrl ?? result.ad_thumbnail ?? null}
         screenshots={result.screenshots ?? []}
       />
     </div>

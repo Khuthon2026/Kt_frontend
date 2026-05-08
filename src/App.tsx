@@ -7,7 +7,7 @@ import { useVerify } from './hooks/useVerify';
 import './App.css';
 
 export default function App() {
-  const { state, progress, result, error, run } = useVerify();
+  const { state, progress, result, error, adUrl, run } = useVerify();
 
   useEffect(() => {
     checkHealth().then((ok) => {
@@ -16,12 +16,12 @@ export default function App() {
   }, []);
 
   if (state === 'done' && result) {
-    return <ResultPage result={result} onBack={() => window.location.reload()} />;
+    return <ResultPage result={result} adUrl={adUrl} onBack={() => window.location.reload()} />;
   }
 
   return (
     <>
-      <HomePage onPick={(id) => run(id)} />
+      <HomePage onPick={(id, adUrl) => run(id, adUrl)} />
       <VerifyModal
         open={state === 'loading' || state === 'failed'}
         state={state === 'idle' ? 'loading' : state}
