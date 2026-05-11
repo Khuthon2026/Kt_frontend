@@ -116,7 +116,6 @@ export default function CompareModal({ open, onClose, adUrl, screenshots }: Prop
                   src={screenshots[ssIdx]}
                   alt={`실제 앱 스크린샷 ${ssIdx + 1}`}
                   className="h-full w-full object-contain"
-                  referrerPolicy="no-referrer"
                   onError={() => setImgError(true)}
                 />
               ) : (

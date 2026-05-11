@@ -16,11 +16,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://khuthonbackend-production.up.railway.app',
+        target: 'http://localhost:8000',
         changeOrigin: true,
       },
       '/health': {
-        target: 'https://khuthonbackend-production.up.railway.app',
+        target: 'http://localhost:8000',
         changeOrigin: true,
       },
     },
